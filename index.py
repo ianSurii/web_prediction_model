@@ -43,8 +43,16 @@ import random
 base = "../input/brest-cancer/Breast Cancer DataSet/"
 train_base="Train/"
 test_base="Test/"
-data_dir = pathlib.Path('../input/brest-cancer/Breast Cancer DataSet/Train/')
+
 test_data_dir = pathlib.Path('../input/brest-cancer/Breast Cancer DataSet/valid/')
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {
+                visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 
 # Collects user input features into dataframe
@@ -57,15 +65,45 @@ if uploaded_file is not None:
 else:
     
     def user_input_features():
+        data_dir = pathlib.Path('model/images/')
         # data_dir = pathlib.Path('../input/brest-cancer/Breast Cancer DataSet/Train/')
-        # files= list(data_dir.glob('*/*.png'))
-        island = st.sidebar.selectbox('Images',('Biscoe','Dream','Torgersen'))
+        files= list(data_dir.glob('*/*.png'))
 
         
+        island = st.sidebar.selectbox('Images',('model/images/examples/217516.png','model/images/examples/396561.png','model/images/examples/515121.png'))
+
+        data = {'images': island}
       
-        features=""
-        return features
-    # input_df = user_input_features()
+        
+        return data
+    image_location_and_name=user_input_features()
+    # image_location_and_name
+    st.image(image_location_and_name['images'])
+    
+    PIL.Image.open(str(image_location_and_name['images']))
+
+    img = keras.preprocessing.image.load_img(image_location_and_name['images'], target_size=(180, 180))
+    
+    img_array = keras.preprocessing.image.img_to_array(img)
+    img_array = tf.expand_dims(img_array, 0)
+    
+    class_names = ["Bening","Malignant"]
+    reconstructed_model = keras.models.load_model(os.path.join("model"))
+
+# Let's check:
+    # try:
+
+
+    savedmodel=reconstructed_model.predict(img_array)
+    score = tf.nn.softmax(savedmodel[0])
+
+    result="""
+    This Breast has {} conditions with an {:.2f} percent confidence.
+    
+    Note Benign is not cancers cell while malignant is cancer cell
+    """.format(class_names[np.argmax(score)], 100 * np.max(score))
+    st.write(result)
+
 
 # Combines user input features with entire penguins dataset
 # This will be useful for the encoding phase
@@ -82,8 +120,7 @@ else:
 #     del df[col]
 # df = df[:1] # Selects only the first row (the user input data)
 
-# Displays the user input features
-st.subheader('User Input features')
+
 
 if uploaded_file is not None:
     # st.write(uploaded_file
@@ -92,7 +129,7 @@ if uploaded_file is not None:
     #         #return redirect(url_for('upload_file', filename=filename))
     # os.rename(UPLOAD_FOLDER + filename, 'test.jpg')
     
-    image_name=random.randrange(11111, 999999, 5)
+    image_name=random.randrange(1111111111, 9999999999, 10)
     print(image_name)
     image_name=str(image_name)
     myimage=uploaded_file
@@ -124,60 +161,11 @@ if uploaded_file is not None:
     
     Note Benign is not cancers cell while malignant is cancer cell
     """.format(class_names[np.argmax(score)], 100 * np.max(score))
-    st.write(result)
+    st.subheader(result)
     # except:
 
 
     
 else:
-    st.write('Awaiting CSV file to be uploaded. Currently using example input parameters (shown below).')
+    st.write('Awaiting image file to be uploaded. Currently using example input parameters (shown below).')
     st.write()
-
-# /home/astra/Vscode/web_prediction_model/saved_model.pb  
-# if uploaded_file is not None:
-    # file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
-    # opencv_image = cv2.imdecode(file_bytes, 1)
-    # st.image(opencv_image, channels="BGR")
-    
-#     img_array = keras.preprocessing.image.img_to_array(opencv_image)
-#     img_array = tf.expand_dims(img_array, 0)
-
-#     reconstructed_model = keras.models.load_model("./my_model")
-
-# # Let's check:
-
-#     savedmodel=reconstructed_model.predict(img_array)
-#     score = tf.nn.softmax(savedmodel[0])
-
-#     result="""This Breast has {} conditions with an {:.2f} percent confidence.
-#     =Note Benign is not cancers cell while malignant is cancer cell
-#     """.format(class_names[np.argmax(score)], 100 * np.max(score))
-#     st.write(result)
-
-   
-# Apply model to make predictions
-     # Create a batch
-
-
-    # prediction = load_clf.predict()
-    # prediction_proba = load_clf.predict_proba(df)
-
-    # predictions = load_clf.predict(img_array)
-    # score = tf.nn.softmax(predictions[0])
-
-    # result="""This Breast has {} conditions with an {:.2f} percent confidence.
-    
-    # Note Benign is not cancers cell while malignant is cancer cell
-    # """.format(class_names[np.argmax(score)], 100 * np.max(score))
-
-    # return result
-
-
-# else:  
-
-    # st.subheader('Prediction')
-    # penguins_species = np.array(['Adelie','Chinstrap','Gentoo'])
-    # st.write(penguins_species[prediction])
-
-    # st.subheader('Prediction Probability')
-    # st.write(prediction)
