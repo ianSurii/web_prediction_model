@@ -161,7 +161,7 @@ if uploaded_file is not None:
     
     Note Benign is not cancers cell while malignant is cancer cell
     """.format(class_names[np.argmax(score)], 100 * np.max(score))
-    st.subheader(result)
+    st.subheader    (result)
     # except:
 
 
