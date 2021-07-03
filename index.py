@@ -140,6 +140,8 @@ if uploaded_file is not None:
     # resized_image = opencv_image.resize(180,180) 
     # file.save("model",uploaded_file.filename)
     class_names = ["Bening","Malignant"]
+    
+    st.write( str(np.version))
 
     img = keras.preprocessing.image.load_img(image_location_and_name, target_size=(180, 180))
     
