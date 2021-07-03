@@ -3,7 +3,7 @@ streamlit==0.61.0
 pandas==0.25.3
 numpy==1.18.1
 tensorflow-cpu
-pathlib==3.4
+pathlib
 PIL==8.3.0
 keras==2.4.3 
 
