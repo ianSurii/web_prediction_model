@@ -7,6 +7,11 @@ import PIL
 import PIL.Image
 from tensorflow import keras
 import pathlib
+import datetime;
+
+
+
+
 
 base = "../input/brest-cancer/Breast Cancer DataSet/"
 train_base="Train/"
@@ -86,15 +91,15 @@ else:
 
 
 if uploaded_file is not None:
-  
     
-    
+    ts = datetime.datetime.now().timestamp()
+    file_name=str(ts)+'.png'
    
-    image_location_and_name='tempDir/'+uploaded_file.name
-    myimage=uploaded_file
+    image_location_and_name='tempDir/'+str(ts)+'.png'
+   
     
 
-    with open(os.path.join("tempDir",uploaded_file.name),"wb") as f:
+    with open(os.path.join("tempDir",str(ts)+'.png'),"wb") as f:
          f.write(uploaded_file.getbuffer())
 
   
