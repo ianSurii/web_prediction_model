@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import cv2
+import sys
 import pickle
 import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier
@@ -135,7 +136,9 @@ if uploaded_file is not None:
     myimage=uploaded_file
     file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
     opencv_image = cv2.imdecode(file_bytes, 1)
+
     image_location_and_name='model/'+image_name+'.png'
+#    file.write(data)
     cv2.imwrite(image_location_and_name,opencv_image)
     # resized_image = opencv_image.resize(180,180) 
     # file.save("model",uploaded_file.filename)
