@@ -14,12 +14,10 @@ test_base="Test/"
 data_dir = pathlib.Path('../input/brest-cancer/Breast Cancer DataSet/Train/')
 test_data_dir = pathlib.Path('../input/brest-cancer/Breast Cancer DataSet/valid/')
 from os import listdir
-import PIL
-import PIL.Image
-from tensorflow import keras
-import pathlib
 
-import random
+from tensorflow import keras
+
+
 base = "../input/brest-cancer/Breast Cancer DataSet/"
 train_base="Train/"
 test_base="Test/"
@@ -47,7 +45,7 @@ else:
     def user_input_features():
         data_dir = pathlib.Path('model/images/')
         # data_dir = pathlib.Path('../input/brest-cancer/Breast Cancer DataSet/Train/')
-        files= list(data_dir.glob('*/*.png'))
+        # files= list(data_dir.glob('*/*.png'))
 
         
         island = st.sidebar.selectbox('Images',('model/images/examples/217516.png','model/images/examples/396561.png','model/images/examples/515121.png'))
@@ -90,9 +88,7 @@ else:
 if uploaded_file is not None:
   
     
-    image_name=random.randrange(1111111111, 9999999999, 10)
-    print(image_name)
-    image_name=str(image_name)
+    
    
     image_location_and_name='tempDir/'+uploaded_file.name
     myimage=uploaded_file

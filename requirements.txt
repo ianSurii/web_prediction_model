@@ -1,6 +1,11 @@
+ 
 streamlit==0.61.0
 pandas==0.25.3
 numpy==1.18.1
-tensorflow-cpu 
+tensorflow-cpu
+pathlib==3.4
+PIL==8.3.0
+keras==2.4.3 
+
 
 
