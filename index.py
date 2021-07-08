@@ -13,21 +13,12 @@ import datetime;
 
 
 
-base = "../input/brest-cancer/Breast Cancer DataSet/"
-train_base="Train/"
-test_base="Test/"
-data_dir = pathlib.Path('../input/brest-cancer/Breast Cancer DataSet/Train/')
-test_data_dir = pathlib.Path('../input/brest-cancer/Breast Cancer DataSet/valid/')
+
 from os import listdir
 
 from tensorflow import keras
 
 
-base = "../input/brest-cancer/Breast Cancer DataSet/"
-train_base="Train/"
-test_base="Test/"
-
-test_data_dir = pathlib.Path('../input/brest-cancer/Breast Cancer DataSet/valid/')
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -37,9 +28,8 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
-
 # Collects user input features into dataframe
-uploaded_file = st.sidebar.file_uploader("Upload your input image file", type=["png","jpg","svg"])
+uploaded_file = st.sidebar.file_uploader("UPLOAD IMAGE FILE", type=["png","jpg","svg"])
 if uploaded_file is not None:
     print("0")
 
@@ -94,12 +84,13 @@ if uploaded_file is not None:
     
     ts = datetime.datetime.now().timestamp()
     file_name=str(ts)+'.png'
-   
+  
     image_location_and_name='tempDir/'+str(ts)+'.png'
+    image_file=pathlib.Path(image_location_and_name)
    
     
 
-    with open(os.path.join("tempDir",str(ts)+'.png'),"wb") as f:
+    with open(os.path.join("tempDir/",file_name),"wb") as f:
          f.write(uploaded_file.getbuffer())
 
   
