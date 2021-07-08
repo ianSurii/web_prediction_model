@@ -39,7 +39,7 @@ streamlit run index.py
 </code>
 </div>
         
-![Screenshot from 2021-07-06 11-26-42](Screenshot from 2021-07-06 11-26-42.png)
+![Screenshot from 2021-07-06 11-26-42](https://github.com/ianSurii/web_prediction_model/blob/main/Screenshot%20from%202021-07-06%2011-26-42.png)
 
 <div>
 <h4>Drag and Drop breast cancer images or browse image files from your computer on the left hand sidemenu</h4>
