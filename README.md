@@ -54,6 +54,10 @@ The model will run and predict the condition of the image<br>
 </ul>
 </div>
 
+https://user-images.githubusercontent.com/47674862/128600243-d9260f6d-9272-4ba7-a1d0-fc9de6f7471f.mp4
+
+
+
 
 
 
